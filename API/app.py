@@ -20,8 +20,8 @@ def create_app():
         return "welcome to the api"
 
     @app.route('/predict', methods=['POST'])
-    def predict(user_input):
-    '''A function that takes user input and returns strains that best match input'''
+    def predict():
+        '''A function that takes user input and returns strains that best match input'''
 
         # import the model
         model = pickle.load("picklemonster.pkl")
@@ -66,7 +66,7 @@ def create_app():
         assert isinstance(text, str)
 
         #load and return the strain info from the database
-        search = strain.query.filter_by(Strain.name==text).first()
+        search = Strain.query.filter(Strain.name==text).first()
         strain_info = {"name" : search.name,
                         "type" : search.kind,
                         "rating" : search.rating,
