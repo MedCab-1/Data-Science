@@ -47,7 +47,7 @@ def create_app():
         # The embedded database.
         return prediction
 
-    @app.route('/strain', methods=['POST'])
+    @app.route('/strain', methods=['POST','GET'])
     def strain():
         '''Function to take user input, receive JSON front-end token, 
         translate token, verify input, return the requested strain information
