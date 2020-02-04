@@ -10,12 +10,12 @@ basilica = "*"
 flask = "*"
 flask-debug = "*"
 gunicorn = "*"
-scipy = "*"
 numpy = "*"
 pandas = "*"
 flask-sqlalchemy = "*"
 psycopg2 = "*"
 python-decouple = "*"
+scikit-learn = "*"
 
 [requires]
 python_version = "3.7"
