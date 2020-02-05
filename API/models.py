@@ -12,5 +12,3 @@ class Strain(DB.Model):
     effects = DB.Column(DB.Text, nullable=False)
     flavor = DB.Column(DB.Text, nullable=False)
     description = DB.Column(DB.Text, nullable=False)
-    symptoms_diseases = DB.Column(DB.Text)
-    all_text_search = DB.Column(DB.Text, nullable=False)
