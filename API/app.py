@@ -5,7 +5,8 @@ from .models import DB, Strain
 import basilica
 import numpy as np
 import pandas as pd
-
+import joblib
+import sklearn
 
 def create_app():
     """Create and configure an instance of the Flask application"""
@@ -19,14 +20,21 @@ def create_app():
     def root():
         return "welcome to the api"
 
-    @app.route('/predict', methods=['POST'])
+    @app.route('/predict', methods=['POST','GET'])
     def predict():
         '''A function that takes user input and returns strains that best match input'''
 
         # import the model
-        model = pickle.load("picklemonster.pkl")
-
+        model = joblib.load('static/picklemonster.pkl')
+        #get user input token
+        json = request.get_json(force=True)
+        
+        #pull input from token
+        user_input = json['input']
+        
+        #plug input into the model
         prediction = model.predict(user_input)
+
         #turns out input doesn't need embedded, saving in case
         # Set input to a list, so we can embed input
         # user_input_list = [user_input]
@@ -45,9 +53,9 @@ def create_app():
 
         # We now have the user input embedded. We want to compare this to
         # The embedded database.
-        return prediction
+        return jsonify({"prediction": prediction})
 
-    @app.route('/strain', methods=['POST','GET'])
+    @app.route('/strain', methods=['POST', 'GET'])
     def strain():
         '''Function to take user input, receive JSON front-end token, 
         translate token, verify input, return the requested strain information
