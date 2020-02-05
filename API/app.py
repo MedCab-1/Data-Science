@@ -2,11 +2,11 @@
 from flask import Flask, jsonify, request
 from decouple import config
 from .models import DB, Strain
+from .predict import predict_strains
 import basilica
 import numpy as np
 import pandas as pd
-import joblib
-import sklearn
+
 
 def create_app():
     """Create and configure an instance of the Flask application"""
@@ -24,36 +24,20 @@ def create_app():
     def predict():
         '''A function that takes user input and returns strains that best match input'''
 
-        # import the model
-        model = joblib.load('static/picklemonster.pkl')
-        #get user input token
+        # get user input token
         json = request.get_json(force=True)
         
-        #pull input from token
-        user_input = json['input']
+        # pull input from token
+        kind = json['type']
+        effect = json['effect']
+        flavor = json['flavor']
+
+        # compile input into one string
+        user_input = str(kind + effect + flavor)[1:-1]
         
-        #plug input into the model
-        prediction = model.predict(user_input)
-
-        #turns out input doesn't need embedded, saving in case
-        # Set input to a list, so we can embed input
-        # user_input_list = [user_input]
-
-        # Embed input 
-        # with basilica.Connection('72a5b6d3-09a2-974d-adb0-eee91584cfc7') as c:
-        #     user_input_symptoms_embeddings = c.embed_sentences(user_input_list)
-
-        # return user_input_symptoms_embeddings
-
-        # run the function to save the embedding value in session memory
-        # (Find out more about this)
-        # user_input_symptoms_embedding = calculate_user_text_embedding(
-        #     user_input, user_input_embedding)
-
-
-        # We now have the user input embedded. We want to compare this to
-        # The embedded database.
-        return jsonify({"prediction": prediction})
+        # plug input into the model
+        strains = predict_strains(user_input)
+        return jsonify({"strains" : strains})
 
     @app.route('/strain', methods=['POST', 'GET'])
     def strain():
