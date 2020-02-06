@@ -2,4 +2,4 @@
 
 ## Endpoints
 
-#### /predict
+#### /predict: 
