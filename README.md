@@ -13,11 +13,11 @@ input: JSON object `{
 "flavor" : []}`
 
 output: JSON object `{"predictions": [{"description": ,
-"effects": , "flavors": , "name": , "rating": , "type": }]} 
+"effects": , "flavors": , "name": , "rating": , "type": }]}` 
 
 #### /strain:
 This route accesses the database to return information about a specific cannabis strain
 
-input: {"strain": ""}
+input: `{"strain": ""}`
 
-returns: {"description": "", "effects": "", "flavors": "", "name": "", "rating": "", "type": ""} 
+returns: `{"description": "", "effects": "", "flavors": "", "name": "", "rating": "", "type": ""}`
