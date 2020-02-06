@@ -1,5 +1,7 @@
 # MedCabinet Flask API
 
+The MedCabinet API can be used to recieve cannabis strain predictions based on desired qualities and characteristics.
+
 ## Endpoints
 
 #### /predict:
