@@ -6,7 +6,7 @@ from .predict import predict_strains
 import basilica
 import numpy as np
 import pandas as pd
-
+import re
 
 def create_app():
     """Create and configure an instance of the Flask application"""
@@ -54,10 +54,16 @@ def create_app():
         # Get the input data from the token
         text = json['strain']
 
+        def repl_func(m):
+            """process regular expression match groups for word upper-casing problem"""
+            return m.group(1) + m.group(2).upper()
+
+        text = re.sub("(^|\s)(\S)", repl_func, text)
+
         # Verify input is a string
         assert isinstance(text, str)
 
-        #load and return the strain info from the database
+        # load and return the strain info from the database
         search = Strain.query.filter(Strain.name==text).first()
         strain_info = {"name" : search.name,
                         "type" : search.kind,
