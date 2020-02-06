@@ -1,2 +1,5 @@
-# Data-Science
-Repo for DS people!
+# MedCabinet Flask API
+
+## Endpoints
+
+#### /predict
