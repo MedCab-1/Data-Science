@@ -6,5 +6,4 @@
 input: JSON object `{
 "type" :  [selected type(s)],
 "effect" : [selected effect(s)],
-"flavor" : [selected flavor(s)]
-}`
+"flavor" : [selected flavor(s)]}`
