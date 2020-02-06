@@ -9,7 +9,8 @@ input: JSON object `{
 "type" :  [],
 "effect" : [],
 "flavor" : []}`
+
 output: JSON object `{"predictions": [{"description": ,
 "effects": , "flavors": , "name": , "rating": , "type": }]} 
 
-####/
+#### /strain:
